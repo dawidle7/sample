@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'adb install -r ./target/your-app.apk'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                sh 'appium -p 4723' 
+                sh 'mvn test' 
+            }
+        }
+    }
+}
