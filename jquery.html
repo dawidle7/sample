@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JQuery Example</title>
+</head>
+<body>
+  <button id="fetchDataButton">Fetch Latest JQuery Version</button>
+  <div id="dataContainer"></div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    $(document).ready(function()  
+
+ {
+      $("#fetchDataButton").click(function()  
+
+ {
+        $.ajax({
+          url: "https://api.cdnjs.com/libraries/jquery/latest",
+          type: "GET",
+          success: function(data) {
+            var latestVersion = data.filename.replace("jquery-", "").replace(".min.js", "");
+            $("#dataContainer").html("Latest JQuery version: " + latestVersion);
+          },
+          error: function(error) {
+            $("#dataContainer").html("Error fetching data: " + error.statusText);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
